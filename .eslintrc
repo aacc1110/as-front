@@ -7,9 +7,10 @@
     "node": true
   },
   "extends": [
+    "react-app",
     "plugin:@typescript-eslint/recommended",
-    "plugin:prettier/recommended"        ,
-    "react-app"
+    "plugin:prettier/recommended"
+    
   ],
   "globals": {
     "Atomics": "readonly",
@@ -22,12 +23,14 @@
     "ecmaVersion": 2019
   },
   "plugins": [
-
     "react"
   ],
   "rules": {
       "@typescript-eslint/indent": 0,
+      "@typescript-eslint/no-empty-interface": 0,
       "@typescript-eslint/explicit-function-return-type": 0,
-      "@typescript-eslint/no-use-before-define": 0
+      "@typescript-eslint/no-use-before-define": 0,
+      "@typescript-eslint/camelcase": 0,
+      "@typescript-eslint/no-explicit-any": 0
   }
 }

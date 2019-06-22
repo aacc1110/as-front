@@ -1,24 +1,21 @@
 import React from 'react';
-import './App.css';
+import { Switch, Route } from 'react-router';
+import loadable from '@loadable/component';
+/* import MainPage from './pages/main/MainPage';
+import PostPage from './pages/PostPage'; */
 
-const App: React.FC = () => {
+const MainPage = loadable(() => import('./pages/main/MainPage'));
+const PostPage = loadable(() => import('./pages/PostPage'));
+
+interface AppProps {}
+
+const App: React.FC<AppProps> = props => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Switch>
+      <Route path="/" component={MainPage} exact />
+      <Route path={['/recent', '/trending']} component={MainPage} />
+      <Route path="/@:username/:urlSlug" component={PostPage} />
+    </Switch>
   );
 };
 
