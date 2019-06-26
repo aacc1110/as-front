@@ -1,8 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import HeaderContainer from '../../container/header/HeaderContainer';
 
-const PostTemplateBlock = styled(HeaderContainer)``;
+const PostTemplateBlock = styled.div``;
 
 interface PostTemplateProps {}
 

@@ -1,10 +1,10 @@
 import { RouteProps, matchPath } from 'react-router';
-import MainPage from './MainPage';
+import Home from './Home';
 
 const config: RouteProps[] = [
   {
     path: '/',
-    component: MainPage
+    component: Home
   }
 ];
 
