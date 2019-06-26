@@ -2,7 +2,6 @@ import React from 'react';
 import styled from 'styled-components';
 import { Logo } from '../../static/svg';
 import Button from '../../styles/Button';
-import Search from './Search';
 import { breakpoints } from '../../styles/responsive';
 
 const HeaderBlock = styled.div`
@@ -32,9 +31,7 @@ const Header: React.FC<HeaderProps> = props => {
         <div className="logo">
           <Logo />
         </div>
-        <div className="search">
-          <Search />
-        </div>
+        <div className="search">search</div>
         <div className="sign">
           <Button size="DEFAULT" color="blue">
             로그인

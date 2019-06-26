@@ -1,5 +1,5 @@
 import { RouteProps, matchPath } from 'react-router';
-import MainPage from './main/MainPage';
+import MainPage from './MainPage';
 
 const config: RouteProps[] = [
   {

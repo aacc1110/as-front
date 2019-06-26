@@ -5,7 +5,7 @@ import TrendPage from './pages/TrendPage';
 /* import MainPage from './pages/main/MainPage';
 import PostPage from './pages/PostPage'; */
 
-const MainPage = loadable(() => import('./pages/main/MainPage'));
+const MainPage = loadable(() => import('./pages/MainPage'));
 const PostPage = loadable(() => import('./pages/PostPage'));
 
 interface AppProps {}
@@ -14,9 +14,9 @@ const App: React.FC<AppProps> = props => {
   return (
     <>
       <Switch>
-        <Route path="/" component={MainPage} exact />
-        <Route path={['/recent', '/trending']} component={MainPage} />
-        <Route path="/@:username/:urlSlug" component={PostPage} />
+        <Route exact path="/" component={MainPage} />
+        <Route exact path="/:mode(trending|recent|following)" component={MainPage} />
+        <Route exact path="/@:username/:urlSlug" component={PostPage} />
       </Switch>
       <TrendPage />
     </>
