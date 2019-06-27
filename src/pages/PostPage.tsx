@@ -1,17 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
-import PostTemplate from '../components/post/PostTemplate';
 
 const PostPageBlock = styled.div``;
 
 interface PostPageProps {}
 
 const PostPage: React.FC<PostPageProps> = props => {
-  return (
-    <PostPageBlock>
-      <PostTemplate />
-    </PostPageBlock>
-  );
+  return <PostPageBlock>포스트임</PostPageBlock>;
 };
 
 export default PostPage;

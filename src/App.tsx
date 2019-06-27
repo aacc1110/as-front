@@ -12,11 +12,14 @@ interface AppProps {}
 
 const App: React.FC<AppProps> = props => {
   return (
-    <Switch>
-      <Route exact path="/" component={Home} />
-      <Route exact path="{['trending'|'recent'|'following']}" component={TrendPage} />
-      <Route exact path="/@:username/:urlSlug" component={Postpage} />
-    </Switch>
+    <>
+      <Switch>
+        <Route exact path="/" component={Home} />
+        <Route exact path="/trend" component={TrendPage} />
+        <Route exact path="/recent" component={Postpage} />
+        <Route exact path="/@:username/:urlSlug" component={Postpage} />
+      </Switch>
+    </>
   );
 };
 

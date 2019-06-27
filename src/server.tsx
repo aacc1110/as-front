@@ -20,29 +20,6 @@ import App from './App';
 
 const clientStats = path.resolve('./build/loadable-stats.json');
 
-function createPage(html: string, collected: { script: string; link: string; style: string }) {
-  return `<!doctype html>
-  <html lang="en">
-  
-  <head>
-    <meta charset="utf-8" />
-    <link rel="shortcut icon" href="/favicon.ico" />
-    <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no" />
-    <meta name="theme-color" content="#000000" />
-    <link rel="manifest" href="/manifest.json" />
-    <title>React App</title>
-    ${collected.link}
-    ${collected.style}
-  </head>
-  
-  <body><noscript>You need to enable JavaScript to run this app.</noscript>
-    <div id="root">${html}</div>
-    ${collected.script}
-  </body>
-  
-  </html>`;
-}
-
 const app = new Koa();
 
 /**
@@ -116,6 +93,29 @@ app.use((ctx, next) => {
 });
 app.use(render);
 app.use(proxy('localhost', { port: 5005 }));
+
+function createPage(html: string, collected: { script: string; link: string; style: string }) {
+  return `<!doctype html>
+  <html lang="en">
+  
+  <head>
+    <meta charset="utf-8" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no" />
+    <meta name="theme-color" content="#000000" />
+    <link rel="manifest" href="/manifest.json" />
+    <title>React App</title>
+    ${collected.link}
+    ${collected.style}
+  </head>
+  
+  <body><noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="root">${html}</div>
+    ${collected.script}
+  </body>
+  
+  </html>`;
+}
 
 app.listen(5001, () => {
   console.log('SSR server listening to http://localhost:5001');

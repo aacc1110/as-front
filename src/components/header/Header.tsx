@@ -18,6 +18,10 @@ const HeaderBlock = styled.div`
     align-items: center;
     .search {
       border: 1px solid black;
+      display: flex;
+      width: 700px;
+      margin: 0 left;
+      padding-left: 1rem;
     }
   }
 `;
