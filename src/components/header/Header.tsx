@@ -2,14 +2,13 @@ import React from 'react';
 import styled from 'styled-components';
 import { Logo } from '../../static/svg';
 import Button from '../../styles/Button';
-import { breakpoints } from '../../styles/responsive';
+import { NavLink } from 'react-router-dom';
 
 const HeaderBlock = styled.div`
   width: 100%;
   .wrapper {
     border: 1px solid black;
-    width: ${breakpoints.xlarge};
-    height: 4rem;
+    height: 3rem;
     margin: 0 auto;
     padding-left: 1rem;
     padding-right: 1rem;
@@ -33,7 +32,9 @@ const Header: React.FC<HeaderProps> = props => {
     <HeaderBlock>
       <div className="wrapper">
         <div className="logo">
-          <Logo />
+          <NavLink to="/">
+            <Logo />
+          </NavLink>
         </div>
         <div className="search">search</div>
         <div className="sign">
