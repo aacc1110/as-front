@@ -1446,20 +1446,6 @@
     "@types/koa-compose" "*"
     "@types/node" "*"
 
-"@types/loadable__component@^5.9.0":
-  version "5.9.0"
-  resolved "https://registry.yarnpkg.com/@types/loadable__component/-/loadable__component-5.9.0.tgz#6c59ccbfa49329d227f74d0c49002888a11a817d"
-  integrity sha512-uTsudqvPxlZumuXQ4YOfD6yoGjPe3RmkL7q5e3HEFERPKv4BCYPTPE2vQ0Klj9KMWFbprEuF1DRjmjlQRunkEA==
-  dependencies:
-    "@types/react" "*"
-
-"@types/loadable__server@^5.9.1":
-  version "5.9.1"
-  resolved "https://registry.yarnpkg.com/@types/loadable__server/-/loadable__server-5.9.1.tgz#f642704664ae1ff107817d6a8a6fd4ea91e3e3ac"
-  integrity sha512-wxHA1EkDo/vm4EHzXIOLh9nbGeYGHWoESIvCwPBjrD2YGBn2eEdYrBwqgIP905OAhTjUTImZ7DZKI5xpq0Q+vQ==
-  dependencies:
-    "@types/react" "*"
-
 "@types/mime@*":
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/@types/mime/-/mime-2.0.1.tgz#dc488842312a7f075149312905b5e3c0b054c79d"
