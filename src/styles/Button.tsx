@@ -1,38 +1,12 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
 import { buttonColorMap } from './palette';
+import { Route } from 'react-router';
 
 type ColorType = 'blue' | 'gray' | 'darkGray' | 'lightGray';
 type SizeType = 'SMALL' | 'DEFAULT' | 'LARGE' | 'BIG';
 
-interface ButtonProps {
-  inline?: boolean;
-  color: ColorType;
-  size: SizeType;
-  border?: boolean;
-}
-
 const ButtonBlock = styled.button<ButtonProps>`
-  display: inline-flex;
-  align-items: center;
-  height: 2rem;
-  padding-left: 1.25rem;
-  padding-right: 1.25rem;
-  font-size: 1rem;
-  font-weight: bold;
-  cursor: pointer;
-  outline: none;
-  border: none;
-  color: white;
-  background: ${props => buttonColorMap[props.color].background};
-  color: ${props => buttonColorMap[props.color].color};
-  &:hover,
-  &:focus {
-    background: ${props => buttonColorMap[props.color].hoverBackground};
-  }
-  border-radius: 4px;
-  padding-top: 0;
-  padding-bottom: 0;
   ${props =>
     props.inline &&
     css`
@@ -78,14 +52,68 @@ const ButtonBlock = styled.button<ButtonProps>`
       padding-right: 2rem;
       border-radius: 1.5rem;
     `}
+  background: none;
+  border: none;
+  outline: none;
+  font-weight: bold;
+  background: ${props => buttonColorMap[props.color].background};
+  color: ${props => buttonColorMap[props.color].color};
+  &:hover,
+  &:focus {
+    background: ${props => buttonColorMap[props.color].hoverBackground};
+  }
+
+  ${props =>
+    props.border &&
+    css<ButtonProps>`
+      background: transparent;
+      border: 1px solid ${props => buttonColorMap[props.color].background};
+      color: ${props => buttonColorMap[props.color].background};
+      &:hover {
+        background: ${props => buttonColorMap[props.color].background};
+        color: white;
+      }
+    `}
+
+  transition: 0.125s all ease-in;
+  &:focus {
+    box-shadow: 0px 2px 12px #00000030;
+  }
+  cursor: pointer;
 `;
 
-const Button: React.FC<ButtonProps> = ({ color, size, children }) => {
-  return (
-    <ButtonBlock color={color} size={size}>
-      {children}
-    </ButtonBlock>
-  );
+type ButtonBlockProps = React.DetailedHTMLProps<
+  React.ButtonHTMLAttributes<HTMLButtonElement>,
+  HTMLButtonElement
+>;
+
+interface ButtonProps extends ButtonBlockProps {
+  inline?: boolean;
+  to?: string;
+  color: ColorType;
+  size: SizeType;
+  border?: boolean;
+}
+
+const Button: React.FC<ButtonProps> = ({ ref, to, color, size, ...rest }) => {
+  if (to) {
+    return (
+      <Route
+        render={({ history }) => (
+          <ButtonBlock
+            color={color}
+            size={size}
+            onClick={e => {
+              e.preventDefault();
+              history.push(to);
+            }}
+            {...rest}
+          />
+        )}
+      />
+    );
+  }
+  return <ButtonBlock color={color} size={size} {...rest} />;
 };
 
 export default Button;

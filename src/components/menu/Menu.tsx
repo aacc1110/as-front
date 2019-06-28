@@ -5,9 +5,10 @@ import { NavLink } from 'react-router-dom';
 import { MdAccessTime, MdTrendingUp, MdRssFeed } from 'react-icons/md';
 
 const MenuBlock = styled.div`
-  position: sticky;
+  position: fixed;
   width: 120px;
-  top: 1.5rem;
+  margin-top: 3.5rem;
+  margin-right: 3rem;
   display: flex;
   flex-direction: column;
   border: 1px solid black;

@@ -1,22 +1,21 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Route } from 'react-router';
-
 import Layout from '../components/Layout';
+import { Route } from 'react-router';
 import TrendPost from '../container/post/TrendPost';
 
-const HomeBlock = styled.div``;
+const TrendPostListBlock = styled.div``;
 
-interface HomeProps {}
+interface TrendPostListProps {}
 
-const Home: React.FC<HomeProps> = props => {
+const TrendPostList: React.FC<TrendPostListProps> = props => {
   return (
-    <HomeBlock>
+    <TrendPostListBlock>
       <Layout>
         <Route path="/" component={TrendPost} />
       </Layout>
-    </HomeBlock>
+    </TrendPostListBlock>
   );
 };
 
-export default Home;
+export default TrendPostList;

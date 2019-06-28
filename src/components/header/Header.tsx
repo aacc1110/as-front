@@ -3,15 +3,17 @@ import styled from 'styled-components';
 import { Logo } from '../../static/svg';
 import Button from '../../styles/Button';
 import { NavLink } from 'react-router-dom';
+import palette from '../../styles/palette';
 
 const HeaderBlock = styled.div`
   width: 100%;
+  position: fixed;
+  background-color: ${palette.gray8};
   .wrapper {
     border: 1px solid black;
     height: 3rem;
     margin: 0 auto;
-    padding-left: 1rem;
-    padding-right: 1rem;
+    padding: 0 1.5rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -38,7 +40,7 @@ const Header: React.FC<HeaderProps> = props => {
         </div>
         <div className="search">search</div>
         <div className="sign">
-          <Button size="DEFAULT" color="blue">
+          <Button size="DEFAULT" color="blue" to="auth">
             로그인
           </Button>
         </div>

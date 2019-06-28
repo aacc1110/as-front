@@ -39,6 +39,7 @@ const render: Middleware = async (ctx, next) => {
     ssrMode: true,
     link: createHttpLink({
       uri: 'http://localhost:5005/graphql',
+      credentials: 'include',
       fetch
     }),
     cache: new InMemoryCache()

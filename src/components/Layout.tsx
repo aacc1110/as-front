@@ -1,14 +1,16 @@
 import React from 'react';
 import styled from 'styled-components';
-import Header from './header/Header';
 import Body from './body/Body';
+import HeaderContainer from '../container/header/HeaderContainer';
 import Menu from './menu/Menu';
 
 const LayoutBlock = styled.div`
-  .body {
+  .view {
     display: flex;
     flex-direction: row;
-    border: 1px solid black;
+    .menu {
+      width: 120px;
+    }
   }
 `;
 
@@ -17,9 +19,11 @@ interface LayoutProps {}
 const Layout: React.FC<LayoutProps> = ({ children }) => {
   return (
     <LayoutBlock>
-      <Header />
-      <div className="body">
-        <Menu />
+      <HeaderContainer />
+      <div className="view">
+        <div className="menu">
+          <Menu />
+        </div>
         <Body>{children}</Body>
       </div>
     </LayoutBlock>
