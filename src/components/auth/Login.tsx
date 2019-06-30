@@ -1,6 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import palette from '../../styles/palette';
+import { useMutation } from 'react-apollo-hooks';
+import { SEND_EMAIL } from '../../graphql/user';
 
 const LoginBlock = styled.form`
   width: 100%;
@@ -50,16 +52,21 @@ interface LoginProps {
   mode: string;
   value: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  sendMail: () => void;
 }
 
-const Login: React.FC<LoginProps> = ({ mode, value, onChange, sendMail }) => {
+const Login: React.FC<LoginProps> = ({ mode, value, onChange }) => {
+  const sendEmail = useMutation(SEND_EMAIL);
   return (
-    <LoginBlock>
+    <LoginBlock
+      onSubmit={e => {
+        e.preventDefault();
+        sendEmail({ variables: { email: value } });
+      }}
+    >
       <input onChange={onChange} value={value} placeholder="이메일을 입력하세요." />
       {mode === 'LOGIN' && <input placeholder="비밀번호를 입력하세요." />}
       <button tabIndex={3}>{mode === 'REGISTER' ? '회원가입' : '로그인'}</button>
-      <button onClick={sendMail}>sendEmail</button>
+      {/* <button onClick={sendMail}>sendEmail</button> */}
     </LoginBlock>
   );
 };

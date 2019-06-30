@@ -1,20 +1,20 @@
 import React from 'react';
-import { Query, QueryResult } from 'react-apollo';
 
-import { GET_POST_LIST, Post } from '../../graphql/post';
+import { GET_POST_LIST } from '../../graphql/post';
 import PostCardList from '../../components/post/PostCardList';
+import { useQuery } from 'react-apollo-hooks';
 
 interface TrendPostProps {}
 
 const TrendPost: React.FC<TrendPostProps> = props => {
-  return (
-    <Query query={GET_POST_LIST}>
-      {({ loading, error, data, fetchMore, client }: QueryResult<{ posts: Post[] }>) => {
-        if (loading || error || !data) return null;
-        return <PostCardList posts={data.posts} />;
-      }}
-    </Query>
-  );
+  const { loading, error, data } = useQuery(GET_POST_LIST);
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+  if (error) {
+    return <div> Error! ${error.message}</div>;
+  }
+  return <PostCardList posts={data.posts} />;
 };
 
 export default TrendPost;

@@ -35,6 +35,29 @@ export interface Comment {
   post: Post;
 }
 
+export const GET_POST = gql`
+  query post($id: ID!) {
+    post(id: $id) {
+      user {
+        id
+        name
+        userprofile {
+          about
+          mobile
+        }
+      }
+      tags {
+        tag
+      }
+      id
+      title
+      comments {
+        comment
+      }
+    }
+  }
+`;
+
 export const GET_POST_LIST = gql`
   {
     posts {

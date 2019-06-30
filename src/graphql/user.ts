@@ -17,7 +17,7 @@ export interface UserProfile {
   mobile: string;
 }
 
-export const SEND_EMILL = gql`
+export const SEND_EMAIL = gql`
   mutation sendEmail($email: String!) {
     sendEmail(email: $email)
   }
