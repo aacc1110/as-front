@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import styled from 'styled-components';
 import palette from '../../styles/palette';
 import { NavLink } from 'react-router-dom';
@@ -7,6 +7,7 @@ import { MdAccessTime, MdTrendingUp, MdRssFeed } from 'react-icons/md';
 const MenuBlock = styled.div`
   position: fixed;
   width: 120px;
+  height: 100%;
   margin-top: 3.5rem;
   margin-right: 3rem;
   display: flex;
@@ -37,7 +38,7 @@ const MenuItem = styled(NavLink)`
 
 interface MenuProps {}
 
-const Menu: React.FC<MenuProps> = props => {
+const Menu: React.FC<MenuProps> = memo(props => {
   return (
     <MenuBlock>
       <MenuItem
@@ -60,6 +61,6 @@ const Menu: React.FC<MenuProps> = props => {
       </MenuItem>
     </MenuBlock>
   );
-};
+});
 
 export default Menu;

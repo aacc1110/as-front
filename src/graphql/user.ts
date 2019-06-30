@@ -17,6 +17,22 @@ export interface UserProfile {
   mobile: string;
 }
 
+export const SEND_EMILL = gql`
+  mutation sendEmail($email: String!) {
+    sendEmail(email: $email)
+  }
+`;
+export const LOGIN = gql`
+  mutation login($email: String!, $password: String!) {
+    login(email: $email, password: $password) {
+      user {
+        id
+        name
+      }
+    }
+  }
+`;
+
 export const GET_CURRENT_USER = gql`
   {
     me {

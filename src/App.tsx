@@ -10,6 +10,7 @@ const TrendPostList = loadable(() => import('./pages/TrendPostList'));
 const RecentPostList = loadable(() => import('./pages/RecentPostList'));
 const Postpage = loadable(() => import('./pages/PostPage'));
 const AuthPage = loadable(() => import('./pages/AuthPage'));
+const RegisterPage = loadable(() => import('./pages/RegisterPage'));
 
 interface AppProps {}
 
@@ -22,6 +23,7 @@ const App: React.FC<AppProps> = props => {
         <Route exact path="/recent" component={RecentPostList} />
         <Route exact path="/@:username/:urlSlug" component={Postpage} />
         <Route exact path="/auth" component={AuthPage} />
+        <Route exact path="/register" component={RegisterPage} />
       </Switch>
     </>
   );

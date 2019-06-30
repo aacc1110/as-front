@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { memo } from 'react';
 import styled from 'styled-components';
 import { Logo } from '../../static/svg';
 import Button from '../../styles/Button';
 import { NavLink } from 'react-router-dom';
 import palette from '../../styles/palette';
+import Search from './Search';
 
 const HeaderBlock = styled.div`
   width: 100%;
@@ -17,19 +18,12 @@ const HeaderBlock = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    .search {
-      border: 1px solid black;
-      display: flex;
-      width: 700px;
-      margin: 0 left;
-      padding-left: 1rem;
-    }
   }
 `;
 
 interface HeaderProps {}
 
-const Header: React.FC<HeaderProps> = props => {
+const Header: React.FC<HeaderProps> = memo(props => {
   return (
     <HeaderBlock>
       <div className="wrapper">
@@ -38,7 +32,9 @@ const Header: React.FC<HeaderProps> = props => {
             <Logo />
           </NavLink>
         </div>
-        <div className="search">search</div>
+        <div className="search">
+          <Search />
+        </div>
         <div className="sign">
           <Button size="DEFAULT" color="blue" to="auth">
             로그인
@@ -47,6 +43,6 @@ const Header: React.FC<HeaderProps> = props => {
       </div>
     </HeaderBlock>
   );
-};
+});
 
 export default Header;

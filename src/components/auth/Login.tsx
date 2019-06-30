@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import palette from '../../styles/palette';
 
-const LoginBlock = styled.div`
+const LoginBlock = styled.form`
   width: 100%;
   display: flex;
   height: 3rem;
@@ -48,19 +48,18 @@ const LoginBlock = styled.div`
 
 interface LoginProps {
   mode: string;
-  disabled: boolean;
   value: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  sendMail: () => void;
 }
 
-const Login: React.FC<LoginProps> = ({ mode, disabled, onChange, value }) => {
+const Login: React.FC<LoginProps> = ({ mode, value, onChange, sendMail }) => {
   return (
     <LoginBlock>
       <input onChange={onChange} value={value} placeholder="이메일을 입력하세요." />
-      <input placeholder="비밀번호를 입력하세요." />
-      <button tabIndex={3} disabled={disabled}>
-        {mode === 'REGISTER' ? '회원가입' : '로그인'}
-      </button>
+      {mode === 'LOGIN' && <input placeholder="비밀번호를 입력하세요." />}
+      <button tabIndex={3}>{mode === 'REGISTER' ? '회원가입' : '로그인'}</button>
+      <button onClick={sendMail}>sendEmail</button>
     </LoginBlock>
   );
 };

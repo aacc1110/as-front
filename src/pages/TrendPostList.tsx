@@ -12,7 +12,7 @@ const TrendPostList: React.FC<TrendPostListProps> = props => {
   return (
     <TrendPostListBlock>
       <Layout>
-        <Route path="/" component={TrendPost} />
+        <Route path="/trend" component={TrendPost} />
       </Layout>
     </TrendPostListBlock>
   );

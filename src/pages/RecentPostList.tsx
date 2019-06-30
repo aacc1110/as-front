@@ -12,7 +12,7 @@ const RecentPostList: React.FC<RecentPostListProps> = props => {
   return (
     <RecentPostListBlock>
       <Layout>
-        <Route path="/" component={TrendPost} />
+        <Route path="/recent" component={TrendPost} />
       </Layout>
     </RecentPostListBlock>
   );

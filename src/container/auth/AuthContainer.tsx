@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import styled from 'styled-components';
 import AuthForm from '../../components/auth/AuthForm';
 
@@ -9,9 +9,23 @@ interface AuthContainerProps {
 }
 
 const AuthContainer: React.FC<AuthContainerProps> = ({ mode }) => {
+  const [authMode, setAuthMode] = useState(mode);
+
+  const onChangeMode = useCallback(() => {
+    if (authMode === 'LOGIN') {
+      setAuthMode('REGISTER');
+    }
+    if (authMode === 'REGISTER') {
+      setAuthMode('LOGIN');
+    }
+  }, [authMode]);
+  useEffect(() => {
+    console.log('authMode', authMode);
+  }, [authMode, onChangeMode]);
+
   return (
     <AuthContainerBlock>
-      <AuthForm mode={mode} />
+      <AuthForm mode={authMode} onChangeMode={onChangeMode} />
     </AuthContainerBlock>
   );
 };
