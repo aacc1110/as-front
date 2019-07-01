@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import palette from '../../styles/palette';
 import useInputs from '../../lib/hooks/useInputs';
-import LabelInput from './LabelInput';
+import LabelInput from '../common/LabelInput';
 import Button from '../../styles/Button';
 
 const RegisterFormBlock = styled.div`
@@ -28,16 +28,16 @@ export type RegisterFormType = {
 interface RegisterFormProps {
   onSubmit: (form: RegisterFormType) => any;
   defaultEmail: string | null | undefined;
+  error: string | null;
 }
 
-const [form, onChange] = useInputs<RegisterFormType>({
-  displayName: '',
-  email: '',
-  username: '',
-  shortBio: ''
-});
-
-const RegisterForm: React.FC<RegisterFormProps> = ({ onSubmit, defaultEmail }) => {
+const RegisterForm: React.FC<RegisterFormProps> = ({ onSubmit, defaultEmail, error }) => {
+  const [form, onChange] = useInputs<RegisterFormType>({
+    displayName: '',
+    email: '',
+    username: '',
+    shortBio: ''
+  });
   return (
     <RegisterFormBlock>
       <LabelInput
@@ -74,6 +74,7 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ onSubmit, defaultEmail }) =
         size={30}
       />
       <div className="form-bottom">
+        {error && <div className="error">{error}</div>}
         <div className="buttons">
           <Button inline color="lightGray" to="/" size="LARGE">
             취소

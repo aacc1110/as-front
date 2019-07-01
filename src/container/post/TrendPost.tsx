@@ -8,9 +8,7 @@ interface TrendPostProps {}
 
 const TrendPost: React.FC<TrendPostProps> = props => {
   const { loading, error, data } = useQuery(GET_POST_LIST);
-  if (loading) {
-    return <div>Loading...</div>;
-  }
+  if (loading || !data) return null;
   if (error) {
     return <div> Error! ${error.message}</div>;
   }

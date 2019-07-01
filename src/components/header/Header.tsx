@@ -36,7 +36,7 @@ const Header: React.FC<HeaderProps> = memo(props => {
           <Search />
         </div>
         <div className="sign">
-          <Button size="DEFAULT" color="blue" to="auth">
+          <Button size="DEFAULT" color="blue" to="login">
             로그인
           </Button>
         </div>
