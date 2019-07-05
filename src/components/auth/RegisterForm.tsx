@@ -28,10 +28,11 @@ export type RegisterFormType = {
 interface RegisterFormProps {
   onSubmit: (form: RegisterFormType) => any;
   defaultEmail: string | null | undefined;
-  error: string | null;
+  errors: string | null;
 }
 
-const RegisterForm: React.FC<RegisterFormProps> = ({ onSubmit, defaultEmail, error }) => {
+const RegisterForm: React.FC<RegisterFormProps> = ({ onSubmit, defaultEmail, errors }) => {
+  console.log('defaultEmail', defaultEmail);
   const [form, onChange] = useInputs<RegisterFormType>({
     displayName: '',
     email: '',
@@ -74,7 +75,7 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ onSubmit, defaultEmail, err
         size={30}
       />
       <div className="form-bottom">
-        {error && <div className="error">{error}</div>}
+        {errors && <div className="error">{errors}</div>}
         <div className="buttons">
           <Button inline color="lightGray" to="/" size="LARGE">
             취소

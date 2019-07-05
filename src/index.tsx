@@ -23,13 +23,11 @@ if (process.env.NODE_ENV === 'production') {
   });
 } else {
   ReactDOM.render(
-    <ApolloProvider client={client}>
-      <ApolloHooksProvider client={client}>
-        <BrowserRouter>
-          <App />
-        </BrowserRouter>
-      </ApolloHooksProvider>
-    </ApolloProvider>,
+    <ApolloHooksProvider client={client}>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </ApolloHooksProvider>,
     document.getElementById('root')
   );
 }

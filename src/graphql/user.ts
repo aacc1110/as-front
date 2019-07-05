@@ -17,9 +17,44 @@ export interface UserProfile {
   mobile: string;
 }
 
+export interface UserEmailConfirm {
+  id: string;
+  code: string;
+  email: string;
+}
+
+export const CHECK_USER = gql`
+  mutation checkUser($email: String!) {
+    checkUser(email: $email)
+  }
+`;
 export const SEND_EMAIL = gql`
   mutation sendEmail($email: String!) {
     sendEmail(email: $email)
+  }
+`;
+export const GET_USER = gql`
+  query user($id: ID, $email: String) {
+    user(id: $id, email: $email) {
+      email
+    }
+  }
+`;
+export const GET_USERS = gql`
+  {
+    users {
+      email
+    }
+  }
+`;
+export const GET_EMAIL_CONFIRM = gql`
+  query userEmailConfirm($code: String) {
+    userEmailConfirm(code: $code) {
+      email
+      code
+      confirm
+      createdAt
+    }
   }
 `;
 export const LOGIN = gql`
@@ -32,7 +67,6 @@ export const LOGIN = gql`
     }
   }
 `;
-
 export const GET_CURRENT_USER = gql`
   {
     me {

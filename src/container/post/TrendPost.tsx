@@ -12,6 +12,7 @@ const TrendPost: React.FC<TrendPostProps> = props => {
   if (error) {
     return <div> Error! ${error.message}</div>;
   }
+  console.log('data', data.posts);
   return <PostCardList posts={data.posts} />;
 };
 

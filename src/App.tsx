@@ -16,16 +16,14 @@ interface AppProps {}
 
 const App: React.FC<AppProps> = props => {
   return (
-    <>
-      <Switch>
-        <Route exact path="/" component={Home} />
-        <Route exact path="/trend" component={TrendPostList} />
-        <Route exact path="/recent" component={RecentPostList} />
-        <Route exact path="/login" component={LoginPage} />
-        <Route exact path="/register" component={RegisterPage} />
-        <Route exact path="/@:username/:urlSlug" component={Postpage} />
-      </Switch>
-    </>
+    <Switch>
+      <Route exact path="/" component={Home} />
+      <Route exact path="/trend" component={TrendPostList} />
+      <Route exact path="/recent" component={RecentPostList} />
+      <Route exact path="/login" component={LoginPage} />
+      <Route exact path="/register" component={RegisterPage} />
+      <Route exact path="/@:username/:urlSlug" component={Postpage} />
+    </Switch>
   );
 };
 

@@ -3,18 +3,23 @@ import styled from 'styled-components';
 import qs from 'qs';
 import RegisterForm, { RegisterFormType } from '../../components/auth/RegisterForm';
 import { RouteComponentProps, withRouter } from 'react-router';
+import { useQuery } from 'react-apollo-hooks';
+import { GET_EMAIL_CONFIRM } from '../../graphql/user';
+import RegisterTemplate from '../../components/auth/RegisterTemplate';
 
 const RegisterContainerBlock = styled.div``;
 
 interface RegisterContainerProps extends RouteComponentProps<{}> {}
 
-const RegisterContainer: React.FC<RegisterContainerProps> = ({ location, history }) => {
+const RegisterContainer: React.FC<RegisterContainerProps> = ({ location, history }: any) => {
   const query: { code?: string } = qs.parse(location.search, {
     ignoreQueryPrefix: true
   });
-  const [error, setError] = useState<null | string>(null);
+
+  const [errors, setErrors] = useState<null | string>(null);
+  /* const xd = useMutation(SEND_EMAIL); */
   const onSubmit = async (form: RegisterFormType) => {
-    setError(null);
+    setErrors(null);
     // validate
     const validation = {
       displayName: (text: string) => {
@@ -37,14 +42,14 @@ const RegisterContainer: React.FC<RegisterContainerProps> = ({ location, history
       }
     };
 
-    const error =
+    const errors =
       validation.displayName(form.displayName) ||
       validation.username(form.username) ||
       validation.shortBio(form.shortBio) ||
       null;
 
-    if (error) {
-      setError(error);
+    if (errors) {
+      setErrors(errors);
       return;
     }
 
@@ -53,23 +58,38 @@ const RegisterContainer: React.FC<RegisterContainerProps> = ({ location, history
       delete formWithoutEmail.email;
 
       try {
-        /* await onLocalRegister({
-          registerToken: registerToken && registerToken.register_token,
-          form: formWithoutEmail
-        }); */
+        /* await xd({ variables: { code: query.code } }).then(response => {
+          return response.data;
+        });
+        console.log('xd', xd); */
         history.push('/');
       } catch (e) {
         if (e.response.status === 409) {
-          setError('이미 존재하는 아이디입니다.');
+          setErrors('이미 존재하는 아이디입니다.');
           return;
         }
-        setError('에러 발생!');
+        setErrors('에러 발생!');
       }
     }
   };
+  const { loading, error, data } = useQuery(GET_EMAIL_CONFIRM, {
+    variables: {
+      code: query.code
+    }
+  });
+  if (loading || !data) return null;
+  if (error) {
+    return <div> Error! ${error.message}</div>;
+  }
   return (
     <RegisterContainerBlock>
-      <RegisterForm onSubmit={onSubmit} defaultEmail={'sdfs'} error={error} />
+      <RegisterTemplate>
+        <RegisterForm
+          onSubmit={onSubmit}
+          defaultEmail={data.userEmailConfirm.email}
+          errors={errors}
+        />
+      </RegisterTemplate>
     </RegisterContainerBlock>
   );
 };

@@ -80,7 +80,7 @@ type InputProps = React.DetailedHTMLProps<
 >;
 
 export interface LabelInputProps extends InputProps {
-  label: string;
+  label?: string;
   placeholder?: string;
   name?: string;
   value?: string;

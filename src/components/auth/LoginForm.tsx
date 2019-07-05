@@ -1,86 +1,96 @@
 import React from 'react';
 import styled from 'styled-components';
-import { MutationFn } from 'react-apollo-hooks';
-import { OperationVariables } from 'apollo-boost';
-
-import Login from './Login';
 import palette from '../../styles/palette';
-import useInput from '../../lib/hooks/useInput';
+import useInputs from '../../lib/hooks/useInputs';
 
 const LoginFormBlock = styled.form`
-  .email-mode {
-    display: flex;
+  width: 100%;
+  display: flex;
+  height: 3rem;
+  input {
     flex: 1;
-    flex-direction: column;
-    align-items: center;
-    line-height: 1.5rem;
-    h2,
-    h4 {
-      margin: 0;
+    border-top-left-radius: 2px;
+    border-bottom-left-radius: 2px;
+    padding: 1rem;
+    font-size: 1rem;
+    border: 1px solid ${palette.gray3};
+    border-right: none;
+    &::placeholder {
+      color: ${palette.gray6};
     }
-    h2 {
-      font-size: 1.3125rem;
-      color: ${palette.gray8};
+    &:disabled {
+      background: ${palette.gray1};
     }
-    .foot {
-      text-align: right;
-      span {
-        margin-right: 0.25rem;
-      }
-      .auth-mode {
-        display: inline-block;
-        font-weight: bold;
-        color: ${palette.blue6};
-        cursor: pointer;
-        &:hover {
-          text-decoration: underline;
-        }
-      }
+  }
+  button {
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+    background: ${palette.blue6};
+    color: white;
+    font-size: 1rem;
+    font-weight: bold;
+    outline: none;
+    border: none;
+    border-top-right-radius: 2px;
+    border-bottom-right-radius: 2px;
+    width: 6rem;
+    cursor: pointer;
+    &:hover,
+    &:focus {
+      background: ${palette.blue5};
+    }
+    &:disabled {
+      background: ${palette.gray5};
+      color: ${palette.gray3};
+      cursor: default;
     }
   }
 `;
 
+export type LoginFormType = {
+  email: string;
+  password: string;
+};
+
 interface LoginFormProps {
   mode: string;
-  onChangeMode: () => void;
-  sendEmail: MutationFn<unknown, OperationVariables>;
+  onSubmit: (form: LoginFormType) => Promise<void>;
 }
 
-const LoginForm: React.FC<LoginFormProps> = ({ mode, onChangeMode, sendEmail }) => {
-  const [email, onChangeEmail] = useInput('');
-  console.log('email', email);
-
-  const modeText = mode === 'REGISTER' ? '회원가입' : '로그인';
+const LoginForm: React.FC<LoginFormProps> = ({ mode, onSubmit }) => {
+  const [form, onChange] = useInputs({
+    email: '',
+    password: ''
+  });
   return (
-    <LoginFormBlock
-      onSubmit={e => {
-        e.preventDefault();
-        if (!email) {
-          console.log('이메일을 입력해주세요.');
-          return null;
-        }
-        sendEmail({ variables: { email } }).then(response => {
-          const success = response.data;
-          if (success) {
-            const x: Element | null = document.querySelector('.email-mode');
-            if (x) {
-              x.innerHTML = `${email}주소로 회원가입 이메일이 발송되었습니다.`;
-            }
-          }
-        });
-      }}
-    >
-      <div className="email-mode">
-        <h2>{modeText}</h2>
-        <Login mode={mode} onChange={onChangeEmail} value={email} />
+    <LoginFormBlock>
+      <input
+        name="email"
+        type="email"
+        onChange={onChange}
+        value={form.email}
+        placeholder="이메일을 입력하세요."
+      />
+      {mode === 'LOGIN' && (
+        <input
+          name="password"
+          type="password"
+          value={form.password}
+          onChange={onChange}
+          placeholder="비밀번호를 입력하세요."
+        />
+      )}
 
-        <div className="foot">
-          <span>{mode === 'LOGIN' ? '아직 회원이 아니신가요?' : '계정이 이미 있으신가요?'}</span>
-          <div className="auth-mode" onClick={onChangeMode}>
-            {mode === 'LOGIN' ? '회원가입' : '로그인'}
-          </div>
-        </div>
-      </div>
+      <button
+        type="submit"
+        tabIndex={3}
+        onClick={e => {
+          e.preventDefault();
+          onSubmit({ ...form });
+        }}
+      >
+        {mode === 'REGISTER' ? '회원가입' : '로그인'}
+      </button>
     </LoginFormBlock>
   );
 };

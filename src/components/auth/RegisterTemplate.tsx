@@ -26,7 +26,7 @@ const RegisterTemplate: React.FC<RegisterTemplateProps> = ({ children }) => {
     <RegisterTemplateBlock>
       <h1>환영합니다!</h1>
       <div className="description">기본회원정보를 등록해주세요</div>
-      <div className="contents">{children}</div>
+      <div>{children}</div>
     </RegisterTemplateBlock>
   );
 };
