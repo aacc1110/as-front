@@ -2,17 +2,18 @@ import React, { useState, useCallback, useEffect } from 'react';
 import styled from 'styled-components';
 import LoginForm, { LoginFormType } from '../../components/auth/LoginForm';
 import LoginTemplate from '../../components/auth/LoginTemplate';
-import { CHECK_USER, SEND_EMAIL } from '../../graphql/user';
+import { CHECK_USER, SEND_EMAIL, LOGIN } from '../../graphql/user';
 import { useMutation, MutationFn } from 'react-apollo-hooks';
 import SendEmailSuccess from '../../components/auth/SendEmailSuccess';
+import { RouteComponentProps, withRouter } from 'react-router';
 
 const LoginContainerBlock = styled.div``;
 
-interface LoginContainerProps {
+interface LoginContainerProps extends RouteComponentProps<{}> {
   mode: 'LOGIN' | 'REGISTER';
 }
 
-const LoginContainer: React.FC<LoginContainerProps> = ({ mode }) => {
+const LoginContainer: React.FC<LoginContainerProps> = ({ mode, history }) => {
   const [authMode, setAuthMode] = useState(mode);
   const [error, setError] = useState<null | string>(null);
   const [sendEmailSuccess, setSendEmailSuccess] = useState(false);
@@ -32,6 +33,8 @@ const LoginContainer: React.FC<LoginContainerProps> = ({ mode }) => {
   const checkUser: MutationFn<any, { email: string }> = useMutation(CHECK_USER);
 
   const sendEmail: MutationFn<any, { email: string }> = useMutation(SEND_EMAIL);
+
+  const login = useMutation(LOGIN);
 
   const onSubmit = async (form: LoginFormType) => {
     setError(null);
@@ -62,6 +65,19 @@ const LoginContainer: React.FC<LoginContainerProps> = ({ mode }) => {
     }
 
     try {
+      if (authMode === 'LOGIN') {
+        console.log('form.email', form.email);
+        await login({
+          variables: {
+            email: form.email,
+            password: form.password
+          }
+        });
+        console.log('login', login);
+
+        history.push('/');
+        return;
+      }
       await checkUser({
         variables: {
           email: form.email
@@ -104,4 +120,4 @@ const LoginContainer: React.FC<LoginContainerProps> = ({ mode }) => {
   );
 };
 
-export default LoginContainer;
+export default withRouter(LoginContainer);

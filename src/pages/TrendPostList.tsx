@@ -9,6 +9,7 @@ const TrendPostListBlock = styled.div``;
 interface TrendPostListProps {}
 
 const TrendPostList: React.FC<TrendPostListProps> = props => {
+  console.log('TrendPostList');
   return (
     <TrendPostListBlock>
       <Layout>

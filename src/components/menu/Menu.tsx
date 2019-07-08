@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import palette from '../../styles/palette';
 import { NavLink } from 'react-router-dom';
@@ -38,15 +38,15 @@ const MenuItem = styled(NavLink)`
 
 interface MenuProps {}
 
-const Menu: React.FC<MenuProps> = memo(props => {
+const Menu: React.FC<MenuProps> = props => {
   return (
     <MenuBlock>
       <MenuItem
         to="/trend"
         activeClassName="active"
-        isActive={(match, location) => {
+        /* isActive={(match, location) => {
           return ['/', '/trend'].indexOf(location.pathname) !== -1;
-        }}
+        }} */
       >
         <MdTrendingUp />
         인기
@@ -61,6 +61,6 @@ const Menu: React.FC<MenuProps> = memo(props => {
       </MenuItem>
     </MenuBlock>
   );
-});
+};
 
 export default Menu;

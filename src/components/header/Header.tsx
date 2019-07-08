@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { Logo } from '../../static/svg';
 import Button from '../../styles/Button';
@@ -23,7 +23,7 @@ const HeaderBlock = styled.div`
 
 interface HeaderProps {}
 
-const Header: React.FC<HeaderProps> = memo(props => {
+const Header: React.FC<HeaderProps> = props => {
   return (
     <HeaderBlock>
       <div className="wrapper">
@@ -43,6 +43,6 @@ const Header: React.FC<HeaderProps> = memo(props => {
       </div>
     </HeaderBlock>
   );
-});
+};
 
 export default Header;

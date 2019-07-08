@@ -23,18 +23,47 @@ export interface UserEmailConfirm {
   email: string;
 }
 
+export interface UserInput {
+  email: string;
+  name: string;
+  password: string;
+}
+
+export interface UserProfileInput {
+  thumbnail: string;
+  about: string;
+  mobile: string;
+}
+
 export const CHECK_USER = gql`
-  mutation checkUser($email: String!) {
+  mutation CheckUser($email: String!) {
     checkUser(email: $email)
   }
 `;
 export const SEND_EMAIL = gql`
-  mutation sendEmail($email: String!) {
+  mutation SendEmail($email: String!) {
     sendEmail(email: $email)
   }
 `;
+export const CREATE_ME = gql`
+  mutation CreateMe($user: UserInput!, $userprofile: UserProfileInput) {
+    createMe(user: $user, userprofile: $userprofile)
+  }
+`;
+export const LOGIN = gql`
+  mutation login($email: String!, $password: String!) {
+    login(email: $email, password: $password) {
+      user {
+        id
+        email
+        name
+      }
+    }
+  }
+`;
+
 export const GET_USER = gql`
-  query user($id: ID, $email: String) {
+  query User($id: ID, $email: String) {
     user(id: $id, email: $email) {
       email
     }
@@ -57,16 +86,7 @@ export const GET_EMAIL_CONFIRM = gql`
     }
   }
 `;
-export const LOGIN = gql`
-  mutation login($email: String!, $password: String!) {
-    login(email: $email, password: $password) {
-      user {
-        id
-        name
-      }
-    }
-  }
-`;
+
 export const GET_CURRENT_USER = gql`
   {
     me {

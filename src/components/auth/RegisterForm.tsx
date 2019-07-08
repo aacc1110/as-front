@@ -20,10 +20,10 @@ const RegisterFormBlock = styled.div`
   }
 `;
 export type RegisterFormType = {
-  displayName: string;
+  name: string;
   email: string;
-  username: string;
-  shortBio: string;
+  password: string;
+  about: string;
 };
 interface RegisterFormProps {
   onSubmit: (form: RegisterFormType) => any;
@@ -34,19 +34,19 @@ interface RegisterFormProps {
 const RegisterForm: React.FC<RegisterFormProps> = ({ onSubmit, defaultEmail, errors }) => {
   console.log('defaultEmail', defaultEmail);
   const [form, onChange] = useInputs<RegisterFormType>({
-    displayName: '',
+    name: '',
     email: '',
-    username: '',
-    shortBio: ''
+    password: '',
+    about: ''
   });
   return (
     <RegisterFormBlock>
       <LabelInput
-        name="displayName"
+        name="name"
         onChange={onChange}
         label="이름"
         placeholder="이름을 입력하세요"
-        value={form.displayName}
+        value={form.name}
         size={20}
       />
       <LabelInput
@@ -59,19 +59,20 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ onSubmit, defaultEmail, err
         size={25}
       />
       <LabelInput
-        name="username"
+        name="password"
+        type="password"
         onChange={onChange}
-        label="아이디"
-        placeholder="아이디를 입력하세요"
-        value={form.username}
+        label="비밀번호"
+        placeholder="비밀번호를 입력하세요."
+        value={form.password}
         size={15}
       />
       <LabelInput
-        name="shortBio"
+        name="about"
         onChange={onChange}
-        label="한 줄 소개"
+        label="한줄소개"
         placeholder="당신을 한 줄로 소개해보세요"
-        value={form.shortBio}
+        value={form.about}
         size={30}
       />
       <div className="form-bottom">
