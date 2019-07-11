@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
 import { Logo } from '../../static/svg';
 import Button from '../../styles/Button';
 import { NavLink } from 'react-router-dom';
 import palette from '../../styles/palette';
 import Search from './Search';
+import AuthContext from '../../context/Store';
 
 const HeaderBlock = styled.div`
   width: 100%;
@@ -24,6 +25,8 @@ const HeaderBlock = styled.div`
 interface HeaderProps {}
 
 const Header: React.FC<HeaderProps> = props => {
+  const user = useContext(AuthContext);
+  console.log('user', user);
   return (
     <HeaderBlock>
       <div className="wrapper">
@@ -36,9 +39,21 @@ const Header: React.FC<HeaderProps> = props => {
           <Search />
         </div>
         <div className="sign">
-          <Button size="DEFAULT" color="blue" to="login">
-            로그인
-          </Button>
+          {user ? (
+            <div>
+              <Button size="DEFAULT" color="blue" to="write">
+                새글작성
+              </Button>
+
+              <Button size="DEFAULT" color="blue" to="logout">
+                로그아웃
+              </Button>
+            </div>
+          ) : (
+            <Button size="DEFAULT" color="blue" to="login">
+              로그인
+            </Button>
+          )}
         </div>
       </div>
     </HeaderBlock>
