@@ -9,6 +9,14 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import client from './client';
+import storage from './lib/storage';
+
+const loadUser = () => {
+  const user = storage.getItem('CURRENT_USER');
+  if (!user) return;
+};
+
+loadUser();
 
 if (process.env.NODE_ENV === 'production') {
   loadableReady(() => {

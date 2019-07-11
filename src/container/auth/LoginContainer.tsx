@@ -6,6 +6,8 @@ import { CHECK_USER, SEND_EMAIL, LOGIN } from '../../graphql/user';
 import { useMutation, MutationFn } from 'react-apollo-hooks';
 import SendEmailSuccess from '../../components/auth/SendEmailSuccess';
 import { RouteComponentProps, withRouter } from 'react-router';
+import storage from '../../lib/storage';
+/* import CheckLogin from '../../lib/CheckLogin'; */
 
 const LoginContainerBlock = styled.div``;
 
@@ -67,13 +69,17 @@ const LoginContainer: React.FC<LoginContainerProps> = ({ mode, history }) => {
     try {
       if (authMode === 'LOGIN') {
         console.log('form.email', form.email);
+        /* CheckLogin({email:form.email, password: form.password}); */
         await login({
           variables: {
             email: form.email,
             password: form.password
           }
+        }).then(response => {
+          const data: any = response.data;
+          console.log('data', JSON.stringify(data.login.user.id));
+          storage.setItem('CURRENT_USER', data.login.user);
         });
-        console.log('login', login);
 
         history.push('/');
         return;

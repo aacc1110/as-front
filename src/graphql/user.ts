@@ -57,11 +57,17 @@ export const LOGIN = gql`
         id
         email
         name
+        userprofile {
+          thumbnail
+          about
+        }
+        posts {
+          id
+        }
       }
     }
   }
 `;
-
 export const GET_USER = gql`
   query User($id: ID, $email: String) {
     user(id: $id, email: $email) {
