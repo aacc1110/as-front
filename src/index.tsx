@@ -9,10 +9,7 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import client from './client';
-import storage from './lib/storage';
 import Store from './context/Store';
-
-const user = storage.getItem('CURRENT_USER');
 
 if (process.env.NODE_ENV === 'production') {
   loadableReady(() => {
@@ -28,11 +25,11 @@ if (process.env.NODE_ENV === 'production') {
 } else {
   ReactDOM.render(
     <ApolloHooksProvider client={client}>
-      <Store.Provider value={user}>
+      <Store>
         <BrowserRouter>
           <App />
         </BrowserRouter>
-      </Store.Provider>
+      </Store>
     </ApolloHooksProvider>,
     document.getElementById('root')
   );

@@ -50,8 +50,13 @@ export const CREATE_ME = gql`
     createMe(user: $user, userprofile: $userprofile)
   }
 `;
+export const LOGOUT = gql`
+  mutation Logout {
+    logout
+  }
+`;
 export const LOGIN = gql`
-  mutation login($email: String!, $password: String!) {
+  mutation Login($email: String!, $password: String!) {
     login(email: $email, password: $password) {
       user {
         id
@@ -83,7 +88,7 @@ export const GET_USERS = gql`
   }
 `;
 export const GET_EMAIL_CONFIRM = gql`
-  query userEmailConfirm($code: String) {
+  query UserEmailConfirm($code: String) {
     userEmailConfirm(code: $code) {
       email
       code

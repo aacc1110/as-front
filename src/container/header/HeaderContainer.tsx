@@ -1,17 +1,24 @@
-import React from 'react';
-import styled from 'styled-components';
+import React, { useContext, useCallback } from 'react';
+
 import Header from '../../components/header/Header';
+import { useMutation } from 'react-apollo-hooks';
+import { LOGOUT } from '../../graphql/user';
+import { UserContext } from '../../context/Store';
+import { RouteComponentProps, withRouter } from 'react-router';
 
-const HeaderContainerBlock = styled.div``;
+interface HeaderContainerProps extends RouteComponentProps<{}> {}
 
-interface HeaderContainerProps {}
+const HeaderContainer: React.FC<HeaderContainerProps> = ({ history }) => {
+  const user = useContext(UserContext);
+  const logOut = useMutation(LOGOUT);
 
-const HeaderContainer: React.FC<HeaderContainerProps> = props => {
-  return (
-    <HeaderContainerBlock>
-      <Header />
-    </HeaderContainerBlock>
-  );
+  const logout = useCallback(() => {
+    logOut();
+    localStorage.removeItem('CURRENT_USER');
+    document.location.href = '/';
+  }, [logOut]);
+
+  return <Header logout={logout} user={user} />;
 };
 
-export default HeaderContainer;
+export default withRouter(HeaderContainer);

@@ -75,6 +75,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ mode, onSubmit }) => {
         <input
           name="password"
           type="password"
+          required
           value={form.password}
           onChange={onChange}
           placeholder="비밀번호를 입력하세요."
