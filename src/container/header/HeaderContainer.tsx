@@ -1,4 +1,4 @@
-import React, { useContext, useCallback } from 'react';
+import React, { useContext } from 'react';
 
 import Header from '../../components/header/Header';
 import { useMutation } from 'react-apollo-hooks';
@@ -12,11 +12,11 @@ const HeaderContainer: React.FC<HeaderContainerProps> = ({ history }) => {
   const user = useContext(UserContext);
   const logOut = useMutation(LOGOUT);
 
-  const logout = useCallback(() => {
+  const logout = () => {
     logOut();
     localStorage.removeItem('CURRENT_USER');
     document.location.href = '/';
-  }, [logOut]);
+  };
 
   return <Header logout={logout} user={user} />;
 };

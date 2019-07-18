@@ -44,9 +44,10 @@ const Menu: React.FC<MenuProps> = props => {
       <MenuItem
         to="/trend"
         activeClassName="active"
-        /* isActive={(match, location) => {
+        isActive={(match, location) => {
+          if (!match) return false;
           return ['/', '/trend'].indexOf(location.pathname) !== -1;
-        }} */
+        }}
       >
         <MdTrendingUp />
         인기
