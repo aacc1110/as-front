@@ -36,7 +36,7 @@
 		"jest-environment-jsdom-fourteen": "0.1.0",
 		"jest-resolve": "24.7.1",
 		"jest-watch-typeahead": "0.3.0",
-		"jsonwebtoken": "^8.5.1",
+		"jsonwebtoken": "^9.0.0",
 		"koa": "^2.10.0",
 		"koa-better-http-proxy": "^0.2.4",
 		"koa-router": "^7.4.0",
